@@ -36,7 +36,7 @@ public class Adventure {
 
     private double foodBudget;
 
-    private List<String> transportationMethods = new ArrayList<String>();
+    private String transportationMethod;
 
     private double flightCost;
 

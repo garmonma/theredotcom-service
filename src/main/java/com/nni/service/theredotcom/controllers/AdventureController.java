@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nni.service.theredotcom.domain.Adventure;
 import com.nni.service.theredotcom.repositories.AdventureRepository;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 @CrossOrigin
@@ -30,6 +32,12 @@ public class AdventureController {
 		Adventure adventure = adventureRepository.findOne(adventureId);
 		return adventure;
 	}
+
+	@RequestMapping(method = RequestMethod.GET, value = "/adventure")
+	List<Adventure> getAdventures(@PathVariable Long accountId){
+		List<Adventure> adventures = adventureRepository.findAllByAccountId(accountId);
+		return adventures;
+	}
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/adventure")
 	ResponseEntity<Adventure> createAdventure(@RequestBody Adventure adventure){
@@ -37,5 +45,4 @@ public class AdventureController {
 		
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
-
 }

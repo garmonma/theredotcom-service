@@ -2,9 +2,7 @@ package com.nni.service.theredotcom.domain;
 
 import java.sql.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Event {
@@ -15,6 +13,8 @@ public class Event {
 
     private String name;
 
+    @OneToOne(cascade= CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinColumn(name="id")
     private Address address;
 
     private Date startDate;
