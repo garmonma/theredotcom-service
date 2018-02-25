@@ -33,7 +33,7 @@ public class AdventureController {
 		return adventure;
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/adventure")
+	@RequestMapping(method = RequestMethod.GET, value = "/adventures")
 	List<Adventure> getAdventures(@PathVariable Long accountId){
 		List<Adventure> adventures = adventureRepository.findAllByAccountId(accountId);
 		return adventures;
@@ -41,6 +41,7 @@ public class AdventureController {
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/adventure")
 	ResponseEntity<Adventure> createAdventure(@RequestBody Adventure adventure){
+		System.out.println(adventure);
 		adventureRepository.save(adventure);
 		
 		return new ResponseEntity<>(HttpStatus.OK);
