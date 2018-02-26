@@ -18,17 +18,17 @@ public class Adventure {
     @GeneratedValue
     private Long id;
     
-    @OneToOne(cascade=CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToOne(cascade=CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name="id")
     private Account account;
 
     private String name;
 
-    @OneToOne(cascade=CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToOne(cascade=CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name="id")
     private Event event;
 
-    @OneToOne(cascade=CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToOne(cascade=CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JoinColumn(name="id")
     private Address startAddress;
 

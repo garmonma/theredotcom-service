@@ -28,22 +28,22 @@ public class AdventureController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/adventure")
-	Adventure getAdventure(@PathVariable Long adventureId){
+	ResponseEntity<Adventure> getAdventure(@PathVariable Long adventureId){
 		Adventure adventure = adventureRepository.findOne(adventureId);
-		return adventure;
+		return new ResponseEntity<Adventure>(adventure, HttpStatus.OK);
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/adventures")
-	List<Adventure> getAdventures(@PathVariable Long accountId){
+	ResponseEntity<List<Adventure>> getAdventures(@PathVariable Long accountId){
 		List<Adventure> adventures = adventureRepository.findAllByAccountId(accountId);
-		return adventures;
+		return new ResponseEntity<List<Adventure>>(adventures, HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/adventure")
 	ResponseEntity<Adventure> createAdventure(@RequestBody Adventure adventure){
 		System.out.println(adventure);
-		adventureRepository.save(adventure);
-		
-		return new ResponseEntity<>(HttpStatus.OK);
+		Adventure savedAdventure = adventureRepository.save(adventure);
+
+		return new ResponseEntity<Adventure>(savedAdventure, HttpStatus.CREATED);
 	}
 }
