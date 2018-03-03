@@ -26,11 +26,17 @@ public class UserAccountController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/register")
-    ResponseEntity<Account> register(@RequestBody User user){
+    ResponseEntity<Account> register(@RequestBody Account account){
+        User user = new User();
+        user.setPassword(account.getUser().getPassword());
+        user.setUsername(account.getUser().getUsername());
+
         User newUser = userRepository.save(user);
 
-        Account account = accountRepository.getAccountByUserId(newUser.getId());
-        return new ResponseEntity<Account>(account, HttpStatus.CREATED);
+        account.setUser(newUser);
+        Account newAccount  = accountRepository.save(account);
+
+        return new ResponseEntity<Account>(newAccount, HttpStatus.CREATED);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/login")
